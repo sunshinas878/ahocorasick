@@ -25,7 +25,7 @@ func TestDumpMatcher(t *testing.T) {
 	m.DumpGraph("dfa.gv")
 	seq := []byte("hershertongher")
 	fmt.Printf("searching %s\n", string(seq))
-	resp := m.Match(seq)
+	resp := m.Match(seq, false)
 	for resp.HasNext() {
 		items := resp.NextMatchItem(seq)
 		for _, itr := range items {
@@ -136,7 +136,7 @@ func TestMatcher(t *testing.T) {
 	// m.DumpGraph("bigdfa.py")
 	seq := []byte("一丁点C++的T桖中华人民共和国人民解放军军队看守南京长江大桥")
 	fmt.Printf("Searching %s\n", string(seq))
-	resp := m.Match(seq)
+	resp := m.Match(seq, false)
 	for resp.HasNext() {
 		for _, item := range resp.NextMatchItem(seq) {
 			key := m.Key(seq, item)
@@ -157,7 +157,7 @@ func TestHugeMatching(t *testing.T) {
 	}
 	m.Compile()
 	seq := []byte(content)
-	resp := m.Match(seq)
+	resp := m.Match(seq, false)
 	ix := 0
 	for resp.HasNext() {
 		for _, item := range resp.NextMatchItem(seq) {
