@@ -146,7 +146,7 @@ func (m *Matcher) Compile() {
 }
 
 // Match multiple subsequence in seq and return tokens
-func (m *Matcher) Match(seq []byte) *Response {
+func (m *Matcher) Match(seq []byte, returnImmediately bool) *Response {
 	if !m.compiled {
 		m.Compile()
 	}
@@ -159,6 +159,9 @@ func (m *Matcher) Match(seq []byte) *Response {
 				nid, _ = da.child(nid, b)
 				if da.isEnd(nid) {
 					resp.buf.addAt(matchAt{OutID: nid, At: i})
+					if returnImmediately {
+						return resp
+					}
 				}
 				break
 			}
