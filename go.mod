@@ -1,4 +1,4 @@
-module github.com/iohub/ahocorasick
+module github.com/sunshinas878/ahocorasick
 
 go 1.12
 
